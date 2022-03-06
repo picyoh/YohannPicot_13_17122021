@@ -13,9 +13,11 @@ import { store } from "./services/store";
 import "./style/main.css";
 
 import Index from "./pages/Index";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import Error from "./pages/Error";
-import Signin from "../components/Signin";
-import Profile from "../layouts/Profile";
+
+import Auth from "./components/Auth";
 
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
@@ -27,8 +29,15 @@ ReactDOM.render(
         <Header />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/login" element={<Signin />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/profile"
+            element={
+              <Auth>
+                <Profile />
+              </Auth>
+            }
+          />
           <Route path="/error" element={<Error />} />
           <Route path="/*" element={<Navigate to="/error" />} />
         </Routes>

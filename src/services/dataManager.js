@@ -54,7 +54,7 @@ async function loadProfile(token) {
         // set access to profile
         store.dispatch({ type: "logIn" });
         // close Loading
-        store.dispatch(setLoading(false));
+        store.dispatch(setLoading());
       }
     });
 }
@@ -91,7 +91,7 @@ async function editNewName(firstname, lastname) {
         };
         console.log(name);
         store.dispatch({ type: "name", payload: name });
-        store.dispatch(setLoading(false));
+        store.dispatch(setLoading());
       }
     });
 }

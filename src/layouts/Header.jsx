@@ -25,7 +25,7 @@ function Header() {
             {
                 (access) ? (
                     <div>
-                        <Link className='main-nav-item' to='/user/profile'>
+                        <Link className='main-nav-item' to='/profile'>
                             <FaUserCircle />
                             {firstname}
                         </Link>
@@ -35,7 +35,7 @@ function Header() {
                         </Link>
                     </div>
                 ) : (
-                    <Link className='main-nav-item' to='/user/login'>
+                    <Link className='main-nav-item' to='/login'>
                         <FaUserCircle />
                         Sign In
                     </Link>

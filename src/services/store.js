@@ -50,7 +50,7 @@ function reducer(state, action) {
   if (action.type === "loading") {
     return {
       ...state,
-      loading: action.payload,
+      loading: !state.loading,
     };
   };
   if (action.type === "logIn") {
@@ -80,9 +80,9 @@ function reducer(state, action) {
 // store
 const store = createStore(reducer, initialState);
 
-// store.subscribe(() => {
-//   const state = store.getState();
-//   console.log(state);
-// });
+store.subscribe(() => {
+  const state = store.getState();
+  console.log(state);
+});
 
 export { store, setLoading, logIn, logOut, setToken, setName };

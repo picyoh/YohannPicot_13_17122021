@@ -12,7 +12,7 @@ function Welcome() {
     const name = nameSelector.firstname + " " + nameSelector.lastname;
 
     const sendNewName = (e) => {
-        store.dispatch(setLoading(true));
+        store.dispatch(setLoading());
         const newFirstname = e.target[0].value;
         const newLastname = e.target[1].value;
         console.log(newFirstname, newLastname)
