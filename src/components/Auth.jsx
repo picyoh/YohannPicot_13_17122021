@@ -6,7 +6,7 @@ function Auth({ children }){
     const isLoading = useSelector((state) => state.loading)
     const access = useSelector((state) => state.access)
     console.log(access)
-    if(isLoading) return null;
+    if(isLoading) return <main className='main bg-dark'></main>;
     return (access) ? children : <Navigate to="/signin" />
 }
 

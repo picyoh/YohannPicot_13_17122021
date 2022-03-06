@@ -61,9 +61,6 @@ body {
   display: inline-flex;
 }
 
-.main-nav-fa {
-}
-
 .main-nav-item:hover {
   text-decoration: underline;
 }
@@ -106,6 +103,32 @@ body {
 .hero-content .text {
   margin-bottom: 0;
   font-size: 0.9rem;
+}
+
+.edit-name{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-wrapper{
+  flex: 100%;
+}
+
+.edit-wrapper input{
+  padding: 0.5rem;
+  margin: 0.3rem;
+}
+
+.edit-button {
+  width: 10%; 
+  padding: 0.5rem;
+  margin: 0.3rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
 }
 
 @media (min-width: 920px) {
@@ -174,8 +197,8 @@ body {
 }
 
 button {
-  text-decoration: underline;
   border-style: none;
+  text-decoration: none;
 }
 
 .sign-in-content {
@@ -263,14 +286,6 @@ button {
 .account-content-wrapper {
   width: 100%;
   flex: 1;
-}
-
-.edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px;
 }
 
 .header {

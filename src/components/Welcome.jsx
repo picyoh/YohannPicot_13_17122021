@@ -12,7 +12,7 @@ function Welcome() {
     const name = nameSelector.firstname + " " + nameSelector.lastname;
 
     const sendNewName = (e) => {
-        store.dispatch(setLoading());
+        store.dispatch(setLoading(true));
         const newFirstname = e.target[0].value;
         const newLastname = e.target[1].value;
         console.log(newFirstname, newLastname)
@@ -27,19 +27,15 @@ function Welcome() {
                 {name}
             </h1>
             {(editing) ? (
-                <div className='editName'>
+                <div className='edit-name'>
+                    <div className='edit-wrapper'>
+                        <input type="text" id="firstname" name="firstname" placeholder="Tony"/>
+                        <input type="text" id="lastname" name="lastname" placeholder='Jarvis'/>
+                    </div>
+                    <div className='edit-wrapper'>
+                    <button className='edit-button' onClick={() => setEditing(true)}>Send Name</button>
                     <button className='edit-button' onClick={() => setEditing(false)}>Cancel</button>
-                    <form onSubmit={sendNewName}>
-                        <div className='input-wrapper'>
-                            <label htmlFor='firstname'>Firstname</label>
-                            <input type="text" id="firstname" name="firstname" required />
-                        </div>
-                        <div className='input-wrapper'>
-                            <label htmlFor='lastname'>Lastname</label>
-                            <input type="text" id="lastname" name="lastname" required />
-                        </div>
-                        <button className='edit-button'>Send Name</button>
-                    </form>
+                    </div>
                 </div>
             ) : (
                 <button className='edit-button' onClick={() => setEditing(true)}>Edit Name</button>
