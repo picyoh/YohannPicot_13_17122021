@@ -1,127 +1,99 @@
 import axios from "axios";
 import { store, setLoading } from "./store";
 
-// Mocked options
-const mockedData = false;
-const mockedUsers = [
-  {
-    firstName: "Tony",
-    lastName: "Stark",
-    email: "tony@stark.com",
-    password: "password123",
-  },
-  {
-    firstName: "Steve",
-    lastName: "Rogers",
-    email: "steve@rogers.com",
-    password: "password456",
-  },
-];
-
 // Server URL
 const Base_URL = "http://localhost:3001/api/v1/";
 
-// check Authentification
+/**
+ * [Send user infos to get access token from database]
+ *
+ * @param   {String}    email       [email form input value]
+ * @param   {String}    password    [password from input value]
+ */
 async function getAccess(email, password) {
-  if (mockedData) {
-    window.setTimeout(() => {
-      const token = "token";
-      store.dispatch({ type: token, payload: token });
-      loadProfile(token);
-    }, 1000);
-  } else {
-    axios
-      .post(Base_URL + "user/login", {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          const token = response.data.body.token;
-          store.dispatch({ type: "token", payload: token });
-          loadProfile(token);
-        }
-      });
-  }
+  axios
+    .post(Base_URL + "user/login", {
+      email: email,
+      password: password,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        // Get token
+        const token = response.data.body.token;
+        store.dispatch({ type: "token", payload: token });
+        // Load profile
+        loadProfile(token);
+      }
+    });
 }
-// Load User Profile
+
+/**
+ * [Load user Profile]
+ *
+ * @param   {String}   token         [JWT token from database]
+ */
+
 async function loadProfile(token) {
-  if (mockedData) {
-    const user = mockedUsers[0];
-    const firstname = user.firstName;
-    const lastname = user.lastName;
-    const name = {
-      firstname: firstname,
-      lastname: lastname,
-    };
-    store.dispatch({ type: "name", payload: name });
-    store.dispatch({ type: "logIn" });
-    store.dispatch(setLoading(false));
-
-    return true;
-  } else {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    axios
-      .post(Base_URL + "user/profile", token, {
-        headers: headers,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          const firstname = response.data.body.firstName;
-          const lastname = response.data.body.lastName;
-          const name = {
-            firstname: firstname,
-            lastname: lastname,
-          };
-          store.dispatch({ type: "name", payload: name });
-          store.dispatch({ type: "logIn" });
-          store.dispatch(setLoading(false));
-
-          return true;
-        }
-      });
-  }
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  axios
+    .post(Base_URL + "user/profile", token, {
+      headers: headers,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        // Set name Object
+        const firstname = response.data.body.firstName;
+        const lastname = response.data.body.lastName;
+        const name = {
+          firstname: firstname,
+          lastname: lastname,
+        };
+        store.dispatch({ type: "name", payload: name });
+        // set access to profile
+        store.dispatch({ type: "logIn" });
+        // close Loading
+        store.dispatch(setLoading(false));
+      }
+    });
 }
 
+/**
+ * [Edit user name]
+ *
+ * @param   {String}   firstname     [firstname from input value]
+ * @param   {String}   lastname      [lastname from input value]
+ */
 async function editNewName(firstname, lastname) {
+  // Get token
   const token = store.getState().token;
+  // Set newName object
   const newName = {
     firstName: firstname,
     lastName: lastname,
   };
-  console.log(newName)
-  if (mockedData) {
-
-    store.dispatch(setLoading(false));
-
-    return true;
-
-  } else {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    axios
-      .put(Base_URL + "user/profile", newName, {
-        headers: headers,
-        
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("put reussi", response)
-          const firstname = response.data.body.firstName;
-          const lastname = response.data.body.lastName;
-          const name = {
-            firstname: firstname,
-            lastname: lastname,
-          };
-          store.dispatch({ type: "name", payload: name });
-          store.dispatch(setLoading(false));
-          return true;
-        }
-      });
-  }
+  const headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  axios
+    .put(Base_URL + "user/profile", newName, {
+      headers: headers,
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        console.log("put reussi", response);
+        const firstname = response.data.body.firstName;
+        const lastname = response.data.body.lastName;
+        const name = {
+          firstname: firstname,
+          lastname: lastname,
+        };
+        console.log(name);
+        store.dispatch({ type: "name", payload: name });
+        store.dispatch(setLoading(false));
+      }
+    });
 }
 
 async function createUser() {

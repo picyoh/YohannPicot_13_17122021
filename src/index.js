@@ -14,7 +14,8 @@ import "./style/main.css";
 
 import Index from "./pages/Index";
 import Error from "./pages/Error";
-import User from "./pages/User";
+import Signin from "../components/Signin";
+import Profile from "../layouts/Profile";
 
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
@@ -26,7 +27,8 @@ ReactDOM.render(
         <Header />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/user/*" element={<User />} />
+          <Route path="/login" element={<Signin />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/error" element={<Error />} />
           <Route path="/*" element={<Navigate to="/error" />} />
         </Routes>

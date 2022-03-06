@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import Signin from '../components/Signin'
-import Profile from '../components/Profile'
+import Profile from '../layouts/Profile'
 
 
 function User() {
