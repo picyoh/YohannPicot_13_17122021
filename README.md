@@ -54,6 +54,29 @@ npm run populate-db
 
 Your server should now be running at [http://locahost:3001](http://locahost:3001) and you will now have two users in your MongoDB database!
 
+### Frontend
+
+To launch React App you need to follow these instructions :
+
+```shell
+# Exit back-end
+cd..
+
+# Clone front-end
+git clone https://github.com/picyoh/YohannPicot_13_17122021
+
+# Move to front-end directory
+cd YohannPicot_13_17122021
+
+# Install dependencies
+npm install
+
+# Run react app with backend
+npm run runBoth 
+```
+
+Your server should now be running at [http://locahost:3000](http://locahost:3000) and you will now see the React app at this address!
+
 ## Populated Database Data
 
 Once you run the `populate-db` script, you should have two users in your database:
@@ -75,27 +98,3 @@ Once you run the `populate-db` script, you should have two users in your databas
 ## API Documentation
 
 To learn more about how the API works, once you have started your local environment, you can visit: [http://localhost:3001/api-docs](http://localhost:3001/api-docs)
-
-### Frontend
-
-Here's a brief intro about what a developer must do in order to start developing
-the project further:
-
-```shell
-# Exit back-end
-cd..
-
-# Clone front-end
-git clone https://github.com/picyoh/YohannPicot_13_17122021
-
-# Move to front-end directory
-cd YohannPicot_13_17122021
-
-# Install dependencies
-npm install
-
-# Run react app with backend
-npm run runBoth 
-```
-
-Your server should now be running at [http://locahost:3000](http://locahost:3000) and you will now see the React app at this address!
