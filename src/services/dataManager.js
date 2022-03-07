@@ -1,6 +1,8 @@
 import axios from "axios";
 import { store, setLoading } from "./store";
 
+import { mockedDatas } from "../profile/mockedDatas/mockedAccount";
+
 // Server URL
 const Base_URL = "http://localhost:3001/api/v1/";
 
@@ -82,23 +84,30 @@ async function editNewName(firstname, lastname) {
     })
     .then((response) => {
       if (response.status === 200) {
-        console.log("put reussi", response);
         const firstname = response.data.body.firstName;
         const lastname = response.data.body.lastName;
         const name = {
           firstname: firstname,
           lastname: lastname,
         };
-        console.log(name);
         store.dispatch({ type: "name", payload: name });
         store.dispatch(setLoading());
       }
     });
 }
 
-async function createUser() {
-  const token = store.getState().token;
-  console.log(token);
+function getTransactions(firstname) {
+  // Auth
+  let id;
+  if (firstname === "Tony") {
+    id = "12";
+  } else {
+    id = "13";
+  }
+  // get mocked datas
+  const user = mockedDatas.filter((data) => data.id === id);
+  const userDatas = user[0].datas;
+  return userDatas;
 }
 
-export { getAccess, editNewName, createUser };
+export { getAccess, editNewName, getTransactions };

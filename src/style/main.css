@@ -131,6 +131,22 @@ body {
   font-weight: bold;
 }
 
+.error{
+  color: white;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+
+.error h2 {
+  font-size: 5rem;
+}
+
+.error p a {
+  color: #00bc77;
+  text-decoration: none;
+}
+
 @media (min-width: 920px) {
   .hero {
     height: 400px;

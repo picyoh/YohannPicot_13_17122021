@@ -80,9 +80,9 @@ function reducer(state, action) {
 // store
 const store = createStore(reducer, initialState);
 
-store.subscribe(() => {
-  const state = store.getState();
-  console.log(state);
-});
+// store.subscribe(() => {
+//   const state = store.getState();
+//   console.log(state);
+// });
 
 export { store, setLoading, logIn, logOut, setToken, setName };

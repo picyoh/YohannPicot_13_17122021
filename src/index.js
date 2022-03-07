@@ -17,7 +17,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Error from "./pages/Error";
 
-import Auth from "./components/Auth";
+import Auth from "./profile/Auth";
 
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";

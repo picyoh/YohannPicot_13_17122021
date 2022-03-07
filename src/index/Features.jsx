@@ -1,5 +1,5 @@
 import React from 'react'
-
+// TODO: array au lieu de props
 function Features(props) {
     const name = props.name;
     const imgName = "/img/icon-" + name + ".png";
