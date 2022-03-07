@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 
 import { useSelector } from 'react-redux'
 
-import { editNewName } from '../services/dataManager'
-import { store, setLoading } from '../services/store';
+import { editNewName } from '../../services/dataManager'
+import { store, setLoading } from '../../services/store';
 
 function Welcome() {
 

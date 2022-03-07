@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store, setLoading } from "./store";
 
-import { mockedDatas } from "../profile/mockedDatas/mockedAccount";
+import { mockedDatas } from "../components/profile/mockedDatas/mockedAccount";
 
 // Server URL
 const Base_URL = "http://localhost:3001/api/v1/";

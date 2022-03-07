@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Welcome from '../profile/Welcome'
-import Account from '../profile/Account'
+import Welcome from '../components/profile/Welcome'
+import Account from '../components/profile/Account'
 
 function Profile() {
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Hero from '../index/Hero'
-import Features from '../index/Features'
+import Hero from '../components/index/Hero'
+import Features from '../components/index/Features'
 
 function Index() {
     return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { getTransactions } from '../services/dataManager'
+import { getTransactions } from '../../services/dataManager'
 
 function Account() {
     const firstname = useSelector((state) => state.name.firstname)
