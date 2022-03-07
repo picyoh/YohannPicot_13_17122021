@@ -1,9 +1,6 @@
 import React from 'react'
-// TODO: array au lieu de props
-function Features(props) {
-    const name = props.name;
-    const imgName = "/img/icon-" + name + ".png";
-    const imgAlt = name[0].toUpperCase() + name.slice(1) + "Icon";
+
+function Features() {
     const featureArray = [
         {
             name: "chat",
@@ -22,17 +19,24 @@ function Features(props) {
         }
     ];
 
-    const infos = featureArray.filter((feature) => feature.name === name)
-    const title = infos[0].title;
-    const text = infos[0].text;
+    const features = featureArray.map((feature, index) => {
+        const imgName = "/img/icon-" + feature.name + ".png";
+        const imgAlt = feature.name[0].toUpperCase() + feature.name.slice(1) + "Icon";
+        const title = feature.title;
+        const text = feature.text;
+        return (
+            <div className='feature-item' key={index}>
+                <img className='feature-icon' src={imgName} alt={imgAlt} />
+                <h3 className='feature-item-title'>{title}</h3>
+                <p>{text}</p>
+            </div>
+        )
+    })
 
     return (
-
-        <div className='feature-item'>
-            <img className='feature-icon' src={imgName} alt={imgAlt} />
-            <h3 className='feature-item-title'>{title}</h3>
-            <p>{text}</p>
-        </div>
+        <>
+            {features}
+        </>
     )
 }
 

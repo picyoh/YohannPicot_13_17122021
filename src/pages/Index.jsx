@@ -9,9 +9,7 @@ function Index() {
             <Hero />
             <section className='features'>
                 <h2 className='sr-only'>Features</h2>
-                <Features name={'chat'} />
-                <Features name={'money'} />
-                <Features name={'security'} />
+                <Features />
             </section>
         </main>
     )
