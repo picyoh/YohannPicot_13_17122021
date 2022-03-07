@@ -97,7 +97,7 @@ async function editNewName(firstname, lastname) {
 }
 
 function getTransactions(firstname) {
-  // Auth
+  // fake Auth
   let id;
   if (firstname === "Tony") {
     id = "12";
