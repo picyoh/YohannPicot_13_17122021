@@ -26,6 +26,9 @@ async function getAccess(email, password) {
         // Load profile
         loadProfile(token);
       }
+    })
+    .catch(err => {  
+      console.log(err)  
     });
 }
 
@@ -58,7 +61,10 @@ async function loadProfile(token) {
         // close Loading
         store.dispatch(setLoading());
       }
-    });
+    })
+    .catch(err => {  
+      console.log(err)  
+    });  
 }
 
 /**
@@ -93,7 +99,10 @@ async function editNewName(firstname, lastname) {
         store.dispatch({ type: "name", payload: name });
         store.dispatch(setLoading());
       }
-    });
+    })
+    .catch(err => {  
+      console.log(err)  
+    });  
 }
 
 function getTransactions(firstname) {
