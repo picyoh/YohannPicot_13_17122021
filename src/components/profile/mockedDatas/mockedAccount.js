@@ -1,6 +1,6 @@
 export const mockedDatas = [
   {
-    id: "12",
+    id: "61d39553a9eae455dbb88536",
     datas: [
       {
         name: "Checking",
@@ -20,7 +20,7 @@ export const mockedDatas = [
     ],
   },
   {
-    id: "13",
+    id: "61d39553a9eae455dbb88538",
     datas: [
       {
         name: "Savings",
@@ -28,7 +28,7 @@ export const mockedDatas = [
         balance: 7932.69,
       },
       {
-        name: "Creadit Card",
+        name: "Credit Card",
         amount: 7268,
         balance: 520.18,
       },

@@ -9,62 +9,14 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /user/login:
-    post:
-      tags:
-        - User Module
-      summary: Login
-      description: API for Login
-      parameters:
-        - in: body
-          name: body
-          description: Login Payload
-          required: true
-          schema:
-            $ref: '#/definitions/Login'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Login Successfully
-          schema:
-            $ref: '#/definitions/LoginResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /user/signup:
-    post:
-      tags:
-        - User Module
-      summary: Signup
-      description: API for Signup
-      parameters:
-        - in: body
-          name: body
-          description: Signup Payload
-          required: true
-          schema:
-            $ref: '#/definitions/User'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Signup Successfully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /user/profile:
+  /user/profile/transactions:
     post:
       security:
         - Bearer: []
       tags:
-        - User Module
-      summary: User Profile API
-      description: API for fetching a user profile
+        - Transactions Module
+      summary: User Transactions API
+      description: API for fetching a user transactions datas
       parameters:
         - in: header
           name: Authorization
@@ -75,51 +27,21 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User's transaction retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/TransactionsApiResponse'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - User Module
-      summary: User Profile API
-      description: API for updating a user profile
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-          type: string
-        - in: body
-          name: body
-          description: Update user profile attributes
-          required: true
-          schema:
-            $ref: '#/definitions/UserProfile'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: User profile retrieved successully
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /user/profile/account:
+  /user/profile/transactions/details:
     post:
       security:
         - Bearer: []
       tags:
-        - Account Module
-      summary: User Account API
-      description: API for fetching a user account datas
+        - Transactions Module
+      summary: User Transactions API
+      description: API for fetching a user transactions transaction details
       parameters:
         - in: header
           name: Authorization
@@ -130,32 +52,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User's accounts retrieved successully
-          schema:
-            $ref: '#/definitions/AccountApiResponse'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /user/profile/account/details:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Account Module
-      summary: User Account API
-      description: API for fetching a user account transaction details
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Account details retrieved successully
+          description: Transactions details retrieved successully
           schema:
             $ref: '#/definitions/DetailsApiResponse'
         '400':
@@ -166,9 +63,9 @@ paths:
       security:
         - Bearer: []
       tags:
-        - Account Module
-      summary: User Account API
-      description: API for updating a user account transactions details
+        - Transactions Module
+      summary: User Transactions API
+      description: API for updating a user transactions transactions details
       parameters:
         - in: header
           name: Authorization
@@ -177,15 +74,15 @@ paths:
           type: string
         - in: body
           name: body
-          description: Update user accounts details attributes
+          description: Update user transaction details attributes
           required: true
           schema:
-            $ref: '#/definitions/AccountDetails'
+            $ref: '#/definitions/TransactionsDetails'
       produces:
         - application/json
       responses:
         '200':
-          description: User account details retrieved successully
+          description: User transactions details retrieved successully
           schema:
             $ref: '#/definitions/DetailsApiResponse'
         '400':
@@ -198,55 +95,7 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  User:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-      firstName:
-        type: string
-        description: user first name
-      lastName:
-        type: string
-        description: user last name
-  Login:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-  ApiResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          id:
-            type: string
-          email:
-            type: string
-  LoginResponse:
-    type: object
-    properties:
-      token:
-        type: string
-  UserProfile:
-    type: object
-    properties:
-      firstName:
-        type: string
-      lastName:
-        type: string
-  AccountApiResponse:
+  TransactionsApiResponse:
     type: object
     properties:
       status:
@@ -290,7 +139,7 @@ definitions:
               type: string
             notes:
               type: string
-  AccountDetails:
+  TransactionsDetails:
     type: object
     properties: 
       category:

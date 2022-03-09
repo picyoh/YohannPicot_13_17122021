@@ -15,7 +15,6 @@ function Welcome() {
         store.dispatch(setLoading(true));
         const newfirstName = document.querySelector("#firstName").value;
         const newlastName = document.querySelector("#lastName").value;
-        console.log(newfirstName, newlastName)
         editNewName(newfirstName, newlastName);
         setEditing(false);
     }
@@ -29,8 +28,8 @@ function Welcome() {
             {(editing) ? (
                 <div className='edit-name'>
                     <div className='edit-wrapper'>
-                        <input type="text" id="firstName" name="firstName" placeholder="Tony"/>
-                        <input type="text" id="lastName" name="lastName" placeholder='Jarvis'/>
+                        <input type="text" id="firstName" name="firstName" placeholder={nameSelector.firstName} />
+                        <input type="text" id="lastName" name="lastName" placeholder={nameSelector.lastName} />
                     </div>
                     <div className='edit-wrapper'>
                     <button className='edit-button' onClick={() => sendNewName()}>Send Name</button>

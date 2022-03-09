@@ -9,6 +9,7 @@ const initialState = {
     firstName: null,
     lastName: null,
   },
+  userId: null,
 };
 
 // action creators
@@ -32,9 +33,9 @@ const logOut = (access) => {
 };
 
 const setToken = (token) => {
-  return { 
+  return {
     type: "token",
-    payload: token
+    payload: token,
   };
 };
 
@@ -45,6 +46,13 @@ const setName = (name) => {
   };
 };
 
+const setUserId = (userId) => {
+  return {
+    type: "userId",
+    payload: userId,
+  };
+};
+
 // reducer
 function reducer(state, action) {
   if (action.type === "loading") {
@@ -52,16 +60,16 @@ function reducer(state, action) {
       ...state,
       loading: !state.loading,
     };
-  };
+  }
   if (action.type === "logIn") {
     return {
       ...state,
       access: true,
     };
-  };
+  }
   if (action.type === "logOut") {
     return initialState;
-  };
+  }
   if (action.type === "token") {
     return {
       ...state,
@@ -74,15 +82,21 @@ function reducer(state, action) {
       name: action.payload,
     };
   }
+  if (action.type === "userId") {
+    return {
+      ...state,
+      userId: action.payload,
+    };
+  }
   return state;
 }
 
 // store
 const store = createStore(reducer, initialState);
 
-store.subscribe(() => {
-  const state = store.getState();
-  console.log(state);
-});
+// store.subscribe(() => {
+//   const state = store.getState();
+//   console.log(state);
+// });
 
-export { store, setLoading, logIn, logOut, setToken, setName };
+export { store, setLoading, logIn, logOut, setToken, setName, setUserId };

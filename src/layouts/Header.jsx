@@ -13,7 +13,6 @@ function Header() {
 
     const handleLogOut = () => {
         dispatch({type: "logOut"});
-        console.log("logout");
     }
 
     return (

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { store, setLoading } from "./store";
+import { store, setLoading, logIn, setToken, setName, setUserId } from "./store";
 
 import { mockedDatas } from "../components/profile/mockedDatas/mockedAccount";
 
@@ -22,17 +22,16 @@ async function getAccess(email, password) {
       if (response.status === 200) {
         // Get token
         const token = response.data.body.token;
-        store.dispatch({ type: "logIn" });
-        store.dispatch({ type: "token", payload: token });
+        store.dispatch(setToken(token));
         // Load profile
         loadProfile(token);
         return true;
       }
     })
-    .catch(err => {  
+    .catch((err) => {
       store.dispatch(setLoading());
-      alert('wrong username or password');
-      console.log(err)  
+      alert("wrong username or password");
+      console.log(err);
     });
 }
 
@@ -59,15 +58,19 @@ async function loadProfile(token) {
           firstName: firstName,
           lastName: lastName,
         };
-        store.dispatch({ type: "name", payload: name });
+        store.dispatch(setName(name));
+        // get Id
+        const userId = response.data.body.id;
+        store.dispatch(setUserId(userId))
         // set access to profile
+        store.dispatch(logIn());
         // close Loading
         store.dispatch(setLoading());
       }
     })
-    .catch(err => {  
-      console.log(err)  
-    });  
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 /**
@@ -93,32 +96,27 @@ async function editNewName(firstName, lastName) {
     })
     .then((response) => {
       if (response.status === 200) {
+        // dispatch new name
         const firstName = response.data.body.firstName;
         const lastName = response.data.body.lastName;
         const name = {
           firstName: firstName,
           lastName: lastName,
         };
-        store.dispatch({ type: "name", payload: name });
+        store.dispatch(setName(name));
         store.dispatch(setLoading());
       }
     })
-    .catch(err => {  
-      console.log(err)  
-    });  
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-function getTransactions(firstName) {
-  // fake Auth
-  let id;
-  if (firstName === "Tony") {
-    id = "12";
-  } else {
-    id = "13";
-  }
+function getTransactions(userId) {
+
   // get mocked datas
-  const user = mockedDatas.filter((data) => data.id === id);
-  const userDatas = user[0].datas;
+  const mockedData = mockedDatas.filter((data) => data.id === userId);
+  const userDatas = mockedData[0].datas;
   return userDatas;
 }
 

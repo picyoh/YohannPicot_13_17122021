@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { getTransactions } from '../../services/dataManager'
 
 function Account() {
-    const firstName = useSelector((state) => state.name.firstName)
-    const accounts = getTransactions(firstName);
+    const userId = useSelector((state) => state.userId)
+    const accounts = getTransactions(userId);
     const accountsList = accounts.map((account, index) => {
         return (
             <section className='account' key={index}>
