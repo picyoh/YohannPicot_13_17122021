@@ -22,12 +22,16 @@ async function getAccess(email, password) {
       if (response.status === 200) {
         // Get token
         const token = response.data.body.token;
+        store.dispatch({ type: "logIn" });
         store.dispatch({ type: "token", payload: token });
         // Load profile
         loadProfile(token);
+        return true;
       }
     })
     .catch(err => {  
+      store.dispatch(setLoading());
+      alert('wrong username or password');
       console.log(err)  
     });
 }
@@ -49,15 +53,14 @@ async function loadProfile(token) {
     .then((response) => {
       if (response.status === 200) {
         // Set name Object
-        const firstname = response.data.body.firstName;
-        const lastname = response.data.body.lastName;
+        const firstName = response.data.body.firstName;
+        const lastName = response.data.body.lastName;
         const name = {
-          firstname: firstname,
-          lastname: lastname,
+          firstName: firstName,
+          lastName: lastName,
         };
         store.dispatch({ type: "name", payload: name });
         // set access to profile
-        store.dispatch({ type: "logIn" });
         // close Loading
         store.dispatch(setLoading());
       }
@@ -70,16 +73,16 @@ async function loadProfile(token) {
 /**
  * [Edit user name]
  *
- * @param   {String}   firstname     [firstname from input value]
- * @param   {String}   lastname      [lastname from input value]
+ * @param   {String}   firstName     [firstName from input value]
+ * @param   {String}   lastName      [lastName from input value]
  */
-async function editNewName(firstname, lastname) {
+async function editNewName(firstName, lastName) {
   // Get token
   const token = store.getState().token;
   // Set newName object
   const newName = {
-    firstName: firstname,
-    lastName: lastname,
+    firstName: firstName,
+    lastName: lastName,
   };
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -90,11 +93,11 @@ async function editNewName(firstname, lastname) {
     })
     .then((response) => {
       if (response.status === 200) {
-        const firstname = response.data.body.firstName;
-        const lastname = response.data.body.lastName;
+        const firstName = response.data.body.firstName;
+        const lastName = response.data.body.lastName;
         const name = {
-          firstname: firstname,
-          lastname: lastname,
+          firstName: firstName,
+          lastName: lastName,
         };
         store.dispatch({ type: "name", payload: name });
         store.dispatch(setLoading());
@@ -105,10 +108,10 @@ async function editNewName(firstname, lastname) {
     });  
 }
 
-function getTransactions(firstname) {
+function getTransactions(firstName) {
   // fake Auth
   let id;
-  if (firstname === "Tony") {
+  if (firstName === "Tony") {
     id = "12";
   } else {
     id = "13";

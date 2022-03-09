@@ -9,7 +9,7 @@ function Header() {
     
     const dispatch = useDispatch();
     const access = useSelector((state) => state.access);
-    const firstname = useSelector((state) => state.name.firstname);
+    const firstName = useSelector((state) => state.name.firstName);
 
     const handleLogOut = () => {
         dispatch({type: "logOut"});
@@ -27,7 +27,7 @@ function Header() {
                     <div>
                         <Link className='main-nav-item' to='/profile'>
                             <FaUserCircle />
-                            {firstname}
+                            {firstName}
                         </Link>
                         <Link className='main-nav-item' to='/'onClick={handleLogOut} >
                             <FaSignOutAlt />

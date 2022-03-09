@@ -14,6 +14,7 @@ function Login() {
 
     const store = useStore();
     const isLoading = useSelector((state) => state.loading)
+    const access = useSelector((state) => state.access)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +26,7 @@ function Login() {
         // check account
         const accessGranted = getAccess(currentMail, currentPsw);
         // move to profile
-        if (!isLoading) {
+        if (accessGranted) {
             navigate('/profile');
         }
     }
@@ -39,16 +40,16 @@ function Login() {
                 }
                 <form onSubmit={handleSubmit} >
                     <div className='input-wrapper'>
-                        <label htmlFor='username'>Username</label>
-                        <input type="mail" id="username" name="username" required />
+                        <label htmlFor='user-name'>Username</label>
+                        <input type="mail" id="user-name" name="user-name" required />
                     </div>
                     <div className='input-wrapper'>
                         <label htmlFor='password'>Password</label>
                         <input type="password" id="password" name="password" required />
                     </div>
                     <div className='input-remember'>
-                        <input type="checkbox" id='rememberMe' name='rememberme' />
                         <label htmlFor='remember-me'>Remember Me</label>
+                        <input type="checkbox" id='remember-me' name='remember-me' />
                     </div>
                     <button className='sign-in-button'>Sign In</button>
                 </form>
