@@ -16,7 +16,7 @@ paths:
       tags:
         - Transactions Module
       summary: Transaction API
-      description: API for fetching a user transactions datas for the current month
+      description: API for fetching a user transactions datas
       parameters:
         - in: header
           name: Authorization
@@ -40,7 +40,7 @@ paths:
         '200':
           description: User's transactions retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/TransactionApiResponse'
         '400':
           description: Invalid Fields
         '500':
