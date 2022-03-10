@@ -51,6 +51,7 @@ async function loadProfile(token) {
     })
     .then((response) => {
       if (response.status === 200) {
+        console.log(response)
         // Set name Object
         const firstName = response.data.body.firstName;
         const lastName = response.data.body.lastName;

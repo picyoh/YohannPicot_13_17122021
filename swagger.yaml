@@ -9,52 +9,73 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /user/profile/transactions:
-    post:
+  /user/profile/{userId}/transactions:
+    get:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: User Transactions API
-      description: API for fetching a user transactions datas
+      summary: Transaction API
+      description: API for fetching a user transactions datas for the current month
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
           type: string
+        - name: userId
+          in: path
+          required: true
+          type: string
+          description: Current user id
+        - in: query
+          name: currentMonth
+          required: true
+          type: string
+          format: date-time
+          description: Current month
       produces:
         - application/json
       responses:
         '200':
-          description: User's transaction retrieved successully
+          description: User's transactions retrieved successully
           schema:
-            $ref: '#/definitions/TransactionsApiResponse'
+            $ref: '#/definitions/ApiResponse'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/profile/transactions/details:
-    post:
+  /user/profile/{userId}/transactions/{transactionId}:
+    get:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: User Transactions API
-      description: API for fetching a user transactions transaction details
+      summary: Transactions API
+      description: API for fetching a user transactions details
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
           type: string
+        - in: path
+          name: userId
+          required: true
+          type: integer
+          description: Current user id
+        - in: path
+          name: transactionId
+          required: true
+          type: integer
+          description: Current transaction id 
       produces:
         - application/json
       responses:
         '200':
-          description: Transactions details retrieved successully
+          description: Transaction details retrieved successully
           schema:
-            $ref: '#/definitions/DetailsApiResponse'
+            $ref: '#/definitions/TransactionApiResponse'
         '400':
           description: Invalid Fields
         '500':
@@ -64,7 +85,7 @@ paths:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: User Transactions API
+      summary: Transactions API
       description: API for updating a user transactions transactions details
       parameters:
         - in: header
@@ -72,6 +93,16 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
+        - in: path
+          name: userId
+          required: true
+          type: integer
+          description: Current user id
+        - in: path
+          name: transactionId
+          required: true
+          type: integer
+          description: Current transaction id
         - in: body
           name: body
           description: Update user transaction details attributes
@@ -82,9 +113,49 @@ paths:
         - application/json
       responses:
         '200':
-          description: User transactions details retrieved successully
+          description: User transactions details updated successully
           schema:
-            $ref: '#/definitions/DetailsApiResponse'
+            $ref: '#/definitions/TransactionApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: User Transactions API
+      description: API for deleting a user transactions details
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: userId
+          required: true
+          type: integer
+          description: Current user id
+        - in: path
+          name: transactionId
+          required: true
+          type: integer
+          description: Current transaction id
+        - in: body
+          name: body
+          description: Delete user transaction details attributes
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionsDetails'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transactions details deleted successully
+          schema:
+            $ref: '#/definitions/TransactionApiResponse'
         '400':
           description: Invalid Fields
         '500':
@@ -95,25 +166,7 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  TransactionsApiResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: array
-        items:
-          type: object
-          properties: 
-            name: 
-              type: string
-            amount: 
-              type : integer
-            balance: 
-              type: number
-  DetailsApiResponse:
+  TransactionApiResponse:
     type: object
     properties: 
       status:
