@@ -30,7 +30,7 @@ function Header() {
                         </Link>
                         <Link className='main-nav-item' to='/'onClick={handleLogOut} >
                             <FaSignOutAlt />
-                            Sign Out
+                            <p>Sign Out</p>
                         </Link>
                     </div>
                 ) : (
